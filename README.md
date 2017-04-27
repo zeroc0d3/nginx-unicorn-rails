@@ -31,7 +31,7 @@ For each, you will need to create a few files in your project. You can copy them
 
     ```
     # Dockerfile
-    FROM zeroc0d3/nginx-unicorn-rails:1.10.1-2.4.1
+    FROM zeroc0d3/nginx-unicorn-rails:1.10.3-2.4.1
 
     # (Optional) Use gem data volume
     # Create via: docker create -v /ruby_gems/2.4.1 --name gems-2.4.1 busybox
@@ -109,7 +109,7 @@ If you're wanting to run a development environment instead, here's how.
 2. Create `Dockerfile` in your project and add the following
 
     ```
-    FROM zeroc0d3/nginx-unicorn-rails:1.10.1-2.4.1
+    FROM zeroc0d3/nginx-unicorn-rails:1.10.3-2.4.1
 
     # (Optional) Use gem data volume
     # Created from: docker create -v /ruby_gems/2.4.1 --name gems-2.4.1 busybox
@@ -200,7 +200,7 @@ If you're wanting to run a development environment instead, here's how.
     # If you're using ActiveRecord
     # bin/rake db:version || { bundle exec rake db:setup; }
     # If you're not using ActiveRecord (e.g. Mongo)
-    # bundle exec rake db:setup 
+    # bundle exec rake db:setup
 
     echo "Removing contents of tmp dirs..."
     rm -rf tmp/unicorn.pid
@@ -311,7 +311,7 @@ You'll want to create parallel configurations that don't conflict with one anoth
 5. Copy `config/unicorn/development.rb` to `config/unicorn/production.rb` and make any necessary modifications.
 6. (Optional) If you have production specific Nginx configuration, enable `ADD config/nginx/production.conf` in your `Dockerfile` and create a `config/nginx/production.conf` file with your Nginx configuration.
 7. Build & run your project
-  
+
     ```
     # PRODUCTION:
     $ docker build -t your/project .

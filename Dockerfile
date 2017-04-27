@@ -8,7 +8,7 @@ RUN apt-get update && \
 
 # Install Nginx.
 RUN add-apt-repository -y ppa:nginx/stable && apt-get update && \
-    apt-get install -qq -y nginx=1.10.1-0+xenial0 && \
+    apt-get install -qq -y nginx=1.10.3-0+xenial0 && \
 
     # Cleanup
     apt-get clean && \

@@ -1,4 +1,4 @@
-FROM zeroc0d3/nginx-unicorn-rails:1.10.1-2.4.1
+FROM zeroc0d3/nginx-unicorn-rails:1.10.3-2.4.1
 
 # (Optional) Use gem data volume
 # Created from: docker create -v /ruby_gems/2.4.1 --name gems-2.4.1 busybox
