@@ -10,6 +10,9 @@ RUN apt-get update && \
 RUN add-apt-repository -y ppa:nginx/stable && apt-get update && \
     apt-get install -qq -y nginx=1.10.3-0+xenial0 && \
 
+# Install SSHd
+    openssh-server openssh-client && \    
+
     # Cleanup
     apt-get clean && \
     cd /var/lib/apt/lists && rm -fr *Release* *Sources* *Packages* && \
@@ -47,3 +50,18 @@ ADD unicorn.rb /app/config/unicorn.rb
 
 # Add default foreman config
 ADD Procfile /app/Procfile
+
+# Install & configure SSH
+# Default ssh root password: secret
+RUN mkdir /var/run/sshd
+RUN echo 'root:secret' | chpasswd
+RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+# SSH login fix. Otherwise user is kicked off after login
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
+ENV NOTVISIBLE "in users profile"
+RUN echo "export VISIBLE=now" >> /etc/profile
+
+EXPOSE 22
+CMD ["/usr/sbin/sshd", "-D"]
